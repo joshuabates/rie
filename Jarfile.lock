@@ -1,0 +1,36 @@
+---
+:runtime:
+- org.apache.httpcomponents:httpclient:jar:4.2
+- org.clojure:clojure:jar:1.5.1
+- org.apache.tomcat:tomcat-juli:jar:7.0.27
+- org.slf4j:slf4j-api:jar:1.7.5
+- org.codehaus.janino:commons-compiler-jdk:jar:2.6.1
+- com.fasterxml.jackson.core:jackson-annotations:jar:2.1.1
+- org.slf4j:jcl-over-slf4j:jar:1.7.5
+- com.goodguide:datomizer:jar:0.2.0
+- com.datomic:datomic-pro:jar:0.9.4815.10
+- org.apache.tomcat:tomcat-jdbc:jar:7.0.27
+- org.jgroups:jgroups:jar:3.2.12.Final
+- com.google.guava:guava:jar:16.0.1
+- org.apache.httpcomponents:httpcore:jar:4.2
+- org.hornetq:hornetq-core-client:jar:2.3.17.Final
+- com.datomic:datomic-lucene-core:jar:3.3.0
+- org.clojure:test.check:jar:0.5.7
+- org.slf4j:jul-to-slf4j:jar:1.7.5
+- org.fressian:fressian:jar:0.6.5
+- io.netty:netty:jar:3.6.7.Final
+- org.hornetq:hornetq-commons:jar:2.3.17.Final
+- com.h2database:h2:jar:1.3.171
+- org.slf4j:log4j-over-slf4j:jar:1.7.5
+- com.fasterxml.jackson.core:jackson-databind:jar:2.1.1
+- com.fasterxml.jackson.core:jackson-core:jar:2.1.1
+- org.jboss.logging:jboss-logging:jar:3.1.0.GA
+- postgresql:postgresql:jar:9.1-901.jdbc4
+- org.hornetq:hornetq-server:jar:2.3.17.Final
+- org.slf4j:slf4j-nop:jar:1.7.5
+- commons-codec:commons-codec:jar:1.3
+- org.clojure:tools.cli:jar:0.2.2
+- org.hornetq:hornetq-journal:jar:2.3.17.Final
+- org.codehaus.janino:commons-compiler:jar:2.6.1
+- com.amazonaws:aws-java-sdk:jar:1.6.6
+- spy:spymemcached:jar:2.8.9
