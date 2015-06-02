@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/GoodGuide/rie"
   s.rubyforge_project = "rie"
   s.files = Dir['README.md', 'Gemfile', 'LICENSE', 'rie.gemspec', 'lib/**/*.rb']
-  s.license = 'MIT'
+  s.license = 'EPL'
 end
