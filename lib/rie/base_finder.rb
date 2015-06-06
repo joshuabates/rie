@@ -67,7 +67,11 @@ module Rie
     end
 
     def all_constraints
-      [*constraints, type_constraint]
+      unless constraints.flatten.empty?
+        [*constraints, type_constraint]
+      else
+        [type_constraint]
+      end
     end
 
     def each(&b)
