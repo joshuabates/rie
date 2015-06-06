@@ -203,7 +203,7 @@ module Rie
     end
 
     def changer
-      self.class::Changer.new(id, attributes)
+      self.class::Changer.new(id, self)
     end
 
     def change(&b)
