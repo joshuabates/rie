@@ -151,6 +151,16 @@ module Rie
       @finder = self.class::Finder.new(entity.db)
     end
 
+    def inspect
+      return "#<#{id}>" if Thread.current[:rie_model_inspect]
+
+      Thread.current[:rie_model_inspect] = true
+
+      "#<#{self.class.name} #{id} #{attributes.inspect[1..-2].strip}>"
+    ensure
+      Thread.current[:rie_model_inspect] = false
+    end
+
     def id
       entity.get(:'db/id')
     end

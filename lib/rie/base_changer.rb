@@ -8,6 +8,10 @@ module Rie
       @retractions = Set.new
     end
 
+    def inspect
+      "<#{self.class.name} #{id} #{Dalton::Connection.convert_datoms(self.datoms).to_edn}>"
+    end
+
     def retract!(attribute)
       @retractions << attribute
     end
