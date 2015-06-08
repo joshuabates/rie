@@ -67,7 +67,7 @@ module Rie
     end
 
     def all_constraints
-      [type_constraint, *constraints]
+      [*constraints, type_constraint]
     end
 
     def each(&b)
