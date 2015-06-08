@@ -68,7 +68,7 @@ module Rie
 
     def all_constraints
       unless constraints.flatten.empty?
-        [*constraints, type_constraint]
+        [*constraints.reject(&:empty?), type_constraint]
       else
         [type_constraint]
       end
