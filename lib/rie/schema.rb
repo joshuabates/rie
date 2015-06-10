@@ -97,6 +97,7 @@ module Rie
         :'db/cardinality' => :"db.cardinality/#{opts.fetch(:cardinality, :one)}",
         :'db/doc' => opts.fetch(:doc) { "The #{attr_key} attribute" },
         :'db/index' => opts.fetch(:index, true),
+        :'db/fulltext' => opts.fetch(:fulltext, false),
         :'db.install/_attribute' => :'db.part/db',
       }
 
