@@ -99,6 +99,7 @@ module Rie
         end
 
         def load(attr, entity_map, db)
+          entity_map = entity_map.first if entity_map.is_a?(Set)
           entity_map = db.entity(entity_map) if entity_map.is_a?(Symbol)
           return nil if entity_map.nil?
           registry_name = entity_map.get(attr.model.datomic_type_key)
