@@ -145,18 +145,18 @@ module Rie
       end
     end
 
-    attr_reader :finder, :entity
-    def initialize(entity)
-      @entity = entity
-      @finder = self.class::Finder.new(entity.db)
+    attr_reader :finder, :dalton_entity
+    def initialize(dalton_entity)
+      @dalton_entity = dalton_entity
+      @finder = self.class::Finder.new(dalton_entity.db)
     end
 
     def id
-      entity.get(:'db/id')
+      dalton_entity.get(:'db/id')
     end
 
     def db
-      entity.db
+      dalton_entity.db
     end
 
     def at(db)
@@ -166,7 +166,7 @@ module Rie
     def [](key)
       definition = self.class.get_attribute(key)
 
-      definition.load(entity.get(definition.datomic_attribute), db)
+      definition.load(dalton_entity.get(definition.datomic_attribute), db)
     end
 
     def interpret_value(value)
@@ -219,7 +219,7 @@ module Rie
     end
 
     def ==(other)
-      self.entity == other.entity
+      self.dalton_entity == other.dalton_entity
     end
   end
 end
