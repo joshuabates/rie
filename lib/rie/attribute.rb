@@ -12,8 +12,8 @@ module Rie
       "#{model.namespace}.#{model.datomic_name}/#{name.to_s.tr('_', '-')}"
     end
 
-    def load(value)
-      type.load(self, value)
+    def load(value, db)
+      type.load(self, value, db)
     end
 
     def dump(value)
@@ -35,7 +35,7 @@ module Rie
         const_get(type_name).new(*args)
       end
 
-      def load(attr, value)
+      def load(attr, value, db)
         value
       end
 
@@ -71,8 +71,8 @@ module Rie
           end
         end
 
-        def load(attr, value)
-          type_from_value(value).load(attr, value)
+        def load(attr, value, db)
+          type_from_value(value).load(attr, value, db)
         end
 
         def dump(attr, value)
@@ -98,7 +98,8 @@ module Rie
           "(ref #{@ref_class.name})"
         end
 
-        def load(attr, entity_map)
+        def load(attr, entity_map, db)
+          entity_map = db.entity(entity_map) if entity_map.is_a?(Symbol)
           return nil if entity_map.nil?
           registry_name = entity_map.get(attr.model.datomic_type_key)
           invalid_value!(attr, entity_map) unless registry_name == @ref_class.datomic_type
@@ -131,11 +132,11 @@ module Rie
           value.map { |x| @element_type.dump(value) }
         end
 
-        def load(attr, value)
+        def load(attr, value, db)
           # empty sets are often returned as nil in datomic :[
           return Set.new if value.nil?
           invalid_value!(attr, value) unless value.is_a? Enumerable
-          Set.new(value.map { |e| @element_type.load(attr, e) })
+          Set.new(value.map { |e| @element_type.load(attr, e, db) })
         end
 
         def datoms_for(attr, changer, value, &block)
