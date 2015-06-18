@@ -89,22 +89,30 @@ module Rie
       end
 
       class RefType < Type
-        attr_reader :ref_class
         def initialize(ref_class)
           @ref_class = ref_class
         end
 
         def inspect
-          "(ref #{@ref_class.name})"
+          "(ref #{ref_class.name})"
+        end
+
+        def ref_class
+          if @ref_class.is_a? String
+            Object.const_get(@ref_class, false)
+          else
+            @ref_class
+          end
         end
 
         def load(attr, entity_map, db)
           entity_map = entity_map.first if entity_map.is_a?(Set)
           entity_map = db.entity(entity_map) if entity_map.is_a?(Symbol)
+
           return nil if entity_map.nil?
           registry_name = entity_map.get(attr.model.datomic_type_key)
-          invalid_value!(attr, entity_map) unless registry_name == @ref_class.datomic_type
-          @ref_class.new(entity_map)
+          invalid_value!(attr, entity_map) unless registry_name == ref_class.datomic_type
+          ref_class.new(entity_map)
         end
 
         def dump(attr, value)
