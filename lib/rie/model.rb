@@ -175,7 +175,7 @@ module Rie
     def [](key)
       definition = self.class.get_attribute(key)
 
-      definition.load(entity.get(definition.datomic_attribute))
+      definition.load(entity.get(definition.datomic_attribute), db)
     end
 
     def interpret_value(value)
