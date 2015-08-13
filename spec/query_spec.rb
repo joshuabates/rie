@@ -11,11 +11,10 @@ describe Rie::Query do
     assert { results.size == 1 }
 
     result = results[0]
-    assert { result.is_a? Hash }
-    assert { result.keys == [:e] }
-    assert { result[:e].foo == 'one' }
-    assert { result[:e].id == one.id }
-    assert { result[:e].db == db }
+    assert { result.is_a? Sample }
+    assert { result.foo == 'one' }
+    assert { result.id == one.id }
+    assert { result.db == db }
   end
 
   it 'binds variables' do
@@ -26,8 +25,7 @@ describe Rie::Query do
       .to_a
 
     assert { results.size == 1 }
-    assert { results[0].keys == [:v] }
-    assert { results[0][:v] == 'one' }
+    assert { results[0] == 'one' }
   end
 
   it 'binds multiple results' do
@@ -48,8 +46,7 @@ describe Rie::Query do
       .where('?e rie.sample/foo "one"').to_a
 
     assert { results.size == 1 }
-    assert { results[0].keys == [:e] }
-    assert { results[0][:e].id == one.id }
+    assert { results[0].id == one.id }
   end
 
   it 'binds values' do
@@ -59,8 +56,7 @@ describe Rie::Query do
       .to_a
 
     assert { results.size == 1 }
-    assert { results[0].keys == [:e] }
-    assert { results[0][:e].id == one.id }
+    assert { results[0].id == one.id }
   end
 
   it 'casts values' do
@@ -70,9 +66,8 @@ describe Rie::Query do
       .to_a
 
     assert { results.size == 1 }
-    assert { results[0].keys == [:e] }
-    assert { results[0][:e].is_a?(Sample) }
-    assert { results[0][:e].id == two.id }
+    assert { results[0].is_a?(Sample) }
+    assert { results[0].id == two.id }
   end
 
   it 'handles type declaration in `find`' do
@@ -83,8 +78,7 @@ describe Rie::Query do
       .to_a
 
     assert { results.size == 1 }
-    assert { results[0].keys == [:v] }
-    assert { results[0][:v] == 'one' }
+    assert { results[0] == 'one' }
   end
 
   it 'handles type declaration in `in`' do
@@ -95,8 +89,7 @@ describe Rie::Query do
       .to_a
 
     assert { results.size == 1 }
-    assert { results[0].keys == [:v] }
-    assert { results[0][:v] == 'two' }
+    assert { results[0] == 'two' }
   end
 
   it 'applies an `or-join`' do
@@ -106,8 +99,7 @@ describe Rie::Query do
       .to_a
 
     assert { results.size == 2 }
-    assert { results.map(&:keys).uniq == [[:e]] }
-    assert { results.map { |r| r[:e].id }.sort == [one.id, two.id].sort }
+    assert { results.map(&:id).sort == [one.id, two.id].sort }
   end
 
   it 'applies a `not-join`' do
@@ -117,7 +109,6 @@ describe Rie::Query do
       .to_a
 
     assert { results.size == 1 }
-    assert { results[0].keys == [:e] }
-    assert { results[0][:e].id == two.id }
+    assert { results[0].id == two.id }
   end
 end
