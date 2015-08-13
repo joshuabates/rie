@@ -42,6 +42,7 @@ module Rie
             :db/ident :#{namespace}/type
             :db/valueType :db.type/ref
             :db/cardinality :db.cardinality/one
+            :db/index true
             :db/doc "A model's type"
             :db.install/_attribute :db.part/db}]
         EDN
@@ -95,6 +96,8 @@ module Rie
         :'db/valueType' => :"db.type/#{opts.fetch(:value_type)}",
         :'db/cardinality' => :"db.cardinality/#{opts.fetch(:cardinality, :one)}",
         :'db/doc' => opts.fetch(:doc) { "The #{attr_key} attribute" },
+        :'db/index' => opts.fetch(:index, true),
+        :'db/fulltext' => opts.fetch(:fulltext, false),
         :'db.install/_attribute' => :'db.part/db',
       }
 
