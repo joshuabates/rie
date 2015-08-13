@@ -7,3 +7,5 @@ gem 'pry'
 
 gem 'jbundler'
 gem 'dalton'
+
+gem 'pry'
